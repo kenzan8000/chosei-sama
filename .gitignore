@@ -22,7 +22,6 @@ xcuserdata
 *.sqlite3
 *.sqlite3-journal
 *.log
-Gemfile.lock
 *.db
 
 
