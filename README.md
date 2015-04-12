@@ -16,7 +16,7 @@ Just 3 Steps
 
 ## Installation
 
-'''
+```
 $ git clone https://github.com/kenzan8000/chosei-sama.git
 $ cd chosei-sama
 $ bundle install
@@ -35,4 +35,4 @@ $ rake build server
 [2015-04-12 09:58:41] INFO  WEBrick::HTTPServer#start: pid=10994 port=4567
 ....
 $ rake deploy
-'''
+```
