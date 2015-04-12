@@ -1,0 +1,150 @@
+.margin-top-1em {
+  margin-top: 1em;
+}
+
+.margin-bottom-1em {
+  margin-bottom: 1em;
+}
+
+.margin-top-2em {
+  margin-top: 2em;
+}
+
+.margin-bottom-2em {
+  margin-bottom: 2em;
+}
+
+.color-666 {
+  color: #666;
+}
+
+/* basic */
+body {
+  min-width: 600px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+}
+
+/* header */
+.header {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  text-shadow: 0 1px 1px black;
+  padding: 3em 0;
+  background: transparent url("/img/banner.jpg") 0 0 repeat fixed;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 3em;
+}
+
+.header-description {
+  margin: 0.5em 0 0 0;
+  font-size: 1.25em;
+}
+
+/* footer */
+.footer {
+  text-align: center;
+  margin: 3em auto;
+  padding: 3em 0 0 0;
+  width: 600px;
+  color: #808080;
+  border-top: solid 1px #ddd;
+}
+
+.footer-description {
+  padding: 0;
+  margin: 0;
+}
+
+/* button */
+.pure-button {
+  border-radius: 6px;
+}
+
+.submit-button {
+  width: 50%;
+  height: 34px;
+  background: #67a023;
+}
+
+.add-button {
+  display: inline-block;
+  margin: 0 0.5em;
+  color: #67a023;
+}
+
+.add-button:hover {
+  color: #57880a;
+  cursor: pointer;
+}
+
+.remove-button {
+  display: inline-block;
+  color: #e74c3c;
+}
+
+.remove-button:hover {
+  color: #c0392b;
+  cursor: pointer;
+}
+
+/* form */
+.pure-form input {
+  color: #666;
+}
+
+.pure-form input[readonly] {
+  color: #666;
+  background: #fff;
+}
+
+.pure-form select[readonly], textarea[readonly] {
+  color: #000;
+  background: #fff;
+}
+
+.form-title {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 300;
+  color: #666;
+}
+
+.form-wrapper {
+  text-align: center;
+  margin: 6em auto;
+  width: 600px;
+}
+
+.form {
+  margin: 2em auto 0 auto !important;
+  width: 310px;
+}
+
+.form-fieldset {
+  padding: 0 !important;
+  text-align: left;
+}
+
+.form-label {
+  color: #666;
+}
+
+.form-description {
+  width: 100% !important;
+}
+
+/* timezone */
+.timezone {
+  max-width: 135px;
+  vertical-align: middle;
+  color: #666;
+}

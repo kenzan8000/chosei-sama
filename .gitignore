@@ -1,7 +1,5 @@
 .sass-cache/
 
-public/css/*
-public/js/*
 vendor
 build/*
 *.pbxuser
