@@ -15,7 +15,7 @@
             TimezoneArrangement_previousTimezoneName = TimezoneArrangement_currentTimezoneName;
 
             var timezoneName = $(this).val();
-            if (timezoneName === "- timezone") { // default timezone
+            if (timezoneName === "- your timezone") { // default timezone
                 timezoneName = TimezoneArrangement_defaultTimezoneName();
             }
             TimezoneArrangement_currentTimezoneName = timezoneName;
