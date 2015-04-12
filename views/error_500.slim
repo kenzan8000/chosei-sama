@@ -1,0 +1,25 @@
+doctype html
+html
+
+    head
+        meta charset="utf-8"
+        title 時差調整さま - 500 Internal Server Error
+
+        script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+
+        link href="/css/pure.css" rel="stylesheet" type="text/css"
+        link href="/css/app.css" rel="stylesheet" type="text/css"
+        link href="/css/error.css" rel="stylesheet" type="text/css"
+
+    body
+        .header
+            h1.header-title
+                | 500
+            p.header-description
+                | Internal Server Error
+
+        .error
+            img.error-image src="/img/500.jpg"
+            button.pure-button.pure-button-primary.back-button onclick="window.history.back();" Back
+
+        == slim :footer

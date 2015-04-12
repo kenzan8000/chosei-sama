@@ -1,0 +1,30 @@
+h2.form-title Answer available dates
+form#attendance-form.form.pure-form action="/schedule_attendance" method="post"
+    fieldset.form-fieldset
+        input name="schedule_id" type="hidden" value="#{@schedule_id}"
+        .pure-u-1
+            / name
+            label.form-label for="user_name" Your name
+            br/
+            input#user_name name="user_name" placeholder="" type="text"
+        hr.margin-top-1em.margin-bottom-1em
+        .pure-u-1
+            / attendances
+            label.form-label Are you available?
+            br/
+            br/
+
+            - for i in 0..@schedule_dates.length-1
+                .attendance-date.color-666 #{@schedule_dates[i].date}
+                input checked="" name="attendance_#{@schedule_dates[i].id}" type="radio" value="1" /
+                span.color-666 Yes
+                span.color-666 &nbsp
+                input name="attendance_#{@schedule_dates[i].id}" type="radio" value="0" /
+                span.color-666 No
+                span.color-666 &nbsp
+                input name="attendance_#{@schedule_dates[i].id}" type="radio" value="2" /
+                span.color-666 Not sure
+                br/
+
+        hr.margin-top-1em.margin-bottom-1em
+        button.pure-button.pure-button-primary.submit-button type="submit" Answer

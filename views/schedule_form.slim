@@ -1,0 +1,25 @@
+h2.form-title Create a schedule
+form#schedule-form.form.pure-form action="/schedule" method="post"
+    fieldset.form-fieldset
+        .pure-u-1.margin-bottom-1em
+            / name
+            label.form-label for="name" Name
+            br/
+            input#name type="text" name="name" placeholder=""
+        .pure-u-1
+            / description
+            label.form-label for="description" Description
+            br/
+            input#description.form-description.pure-input-1-3 type="text" name="description" placeholder="optional"
+        hr.margin-top-1em.margin-bottom-1em
+        #dates.pure-u-1
+            / date
+            span
+                label.form-label Available dates
+                | &nbsp&nbsp
+                select#timezones.timezone
+                    option.timezone
+                        | - timezone
+            br/
+        hr.margin-top-1em.margin-bottom-1em
+        button.pure-button.pure-button-primary.submit-button type="submit" Create

@@ -1,0 +1,58 @@
+doctype html
+html
+
+    head
+        meta charset="utf-8"
+        title 時差調整さま - #{@schedule.name}
+
+        script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+        script type="text/javascript" src="/js/moment.min.js"
+        script type="text/javascript" src="/js/moment-timezone-with-data.min.js"
+        script type="text/javascript" src="/js/app.js"
+        script type="text/javascript" src="/js/schedule.js"
+
+        link href="/css/pure.css" rel="stylesheet" type="text/css"
+        link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+        link href="/css/app.css" rel="stylesheet" type="text/css"
+        link href="/css/schedule.css" rel="stylesheet" type="text/css"
+
+    body
+        .header
+            h1.header-title
+                | #{@schedule.name}
+                | &nbsp
+                i.fa.fa-times.delete-schedule-button id="schedule-#{@schedule.id}"
+            p.header-description #{@schedule.description}
+
+        .schedule
+            table.pure-table.schedule-table
+                thead
+                    tr
+                        th
+                            select#timezones.timezone
+                                option.timezone
+                                    | - timezone
+                        - for i in 0..@schedule_users.length-1
+                            th.schedule-user
+                                | #{@schedule_users[i].name}
+                                | &nbsp
+                                i.fa.fa-times.delete-schedule-user-button id="schedule-user-#{@schedule_users[i].id}"
+
+                tbody.schedule-table-body
+                    - for i in 0..@schedule_dates.length-1
+                        == (i % 2 == 0) ?  '<tr>' : '<tr class="pure-table-odd">'
+                        td.attendance-date #{@schedule_dates[i].date}
+                        - for j in 0..@schedule_users.length-1
+                            td
+                                - if @schedule_attendances[i][j] == 1
+                                    i.fa.fa-thumbs-o-up.schedule-yes
+                                - elsif @schedule_attendances[i][j] == 0
+                                    i.fa.fa-ban
+                                - else
+                                    i.fa.fa-question
+                        == '</tr>'
+
+        .form-wrapper
+            == slim :schedule_attendance_form
+
+        == slim :footer
