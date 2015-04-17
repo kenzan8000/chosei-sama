@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
   create_table "schedule_users", force: :cascade do |t|
     t.string   "schedule_id"
     t.string   "name"
+    t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

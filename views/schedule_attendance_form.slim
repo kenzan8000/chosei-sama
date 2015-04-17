@@ -6,7 +6,19 @@ form#attendance-form.form.pure-form action="/schedule_attendance" method="post"
             / name
             label.form-label for="user_name" Your name
             br/
-            input#user_name name="user_name" placeholder="" type="text"
+            - if @facebook_is_login
+                img#user-image.user-image src="#{@facebook_image}"
+                span.color-666 &nbsp&nbsp
+                input#user_name.user-name name="user_name" placeholder="" type="text" readonly="readonly" value="#{@facebook_user_name}"
+                span.color-666 &nbsp&nbsp
+                a.pure-button.pure-button-primary.fb-button href="/logout?redirect_path=/schedule/#{@schedule_id}"
+                    i.fa.fa-facebook &nbsp Logout
+            - else
+                input#user_name.user-name name="user_name" placeholder="" type="text"
+                span.color-666 &nbsp or &nbsp
+                a.pure-button.pure-button-primary.fb-button href="/login?redirect_path=/schedule/#{@schedule_id}"
+                    i.fa.fa-facebook &nbsp Login
+
         hr.margin-top-1em.margin-bottom-1em
         .pure-u-1
             / attendances

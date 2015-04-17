@@ -33,6 +33,9 @@
             }
             else { json[this.name] = $(this).val(); }
         });
+        if (typeof($("#user-image").attr("src")) == 'string') {
+            json["user_image"] = $("#user-image").attr("src");
+        }
         $.ajax({
             type: "POST",
              url: "/schedule_attendance",

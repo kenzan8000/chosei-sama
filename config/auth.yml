@@ -1,0 +1,22 @@
+development:
+  omniauth:
+    enabled: true
+    allow_single_sign_on: false
+    block_auto_created_users: true
+  providers:
+    {
+      name: 'facebook',
+      app_id: '1606779942872293',
+      app_secret: '9d832889d4c3f73a9ac3023f25010a0f',
+      scope: 'public_profile,email,user_friends'
+    }
+
+production:
+  omniauth:
+    enabled: true
+    allow_single_sign_on: false
+  providers:
+    {
+      name: 'facebook',
+      scope: 'public_profile,email,user_friends'
+    }

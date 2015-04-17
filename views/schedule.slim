@@ -34,6 +34,10 @@ html
                                     | - your timezone
                         - for i in 0..@schedule_users.length-1
                             th.schedule-user
+                                - if @schedule_users[i].image_url != nil
+                                    img.schedule-user-image src="#{@schedule_users[i].image_url}"
+                                    | &nbsp&nbsp
+
                                 | #{@schedule_users[i].name}
                                 | &nbsp
                                 i.fa.fa-times.delete-schedule-user-button id="schedule-user-#{@schedule_users[i].id}"

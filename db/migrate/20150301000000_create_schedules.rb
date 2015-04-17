@@ -16,6 +16,7 @@ class CreateSchedules < ActiveRecord::Migration
     create_table :schedule_users do |t|
       t.string :schedule_id
       t.string :name
+      t.string :image_url
       t.timestamps
     end
 

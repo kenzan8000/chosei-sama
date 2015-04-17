@@ -8,6 +8,14 @@ require './models/schedule_user.rb'
 require './models/schedule_attendance.rb'
 
 
+configure :development do
+  enable :sessions, :logging
+end
+configure :production do
+  enable :sessions
+end
+
+
 # active record
 use ActiveRecord::ConnectionAdapters::ConnectionManagement
 
@@ -17,6 +25,61 @@ configure :development do
 end
 configure :production do
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+end
+
+
+# omniauth
+use OmniAuth::Builder do
+  auth_config = YAML.load_file('config/auth.yml')
+  if development?
+    auth_config = auth_config['development']
+    provider :facebook, auth_config['providers']['app_id'], auth_config['providers']['app_secret'], :scope => auth_config['providers']['scope']
+  end
+  if production?
+    auth_config = auth_config['development']
+    provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], :scope => auth_config['providers']['scope']
+  end
+end
+
+
+get '/auth/:provider/callback' do
+  # get session
+  info = request.env['omniauth.auth']
+  session[:uid] = info['uid']
+  session[:user_name] = info['info']['name']
+  session[:image] = info['info']['image']
+  session[:token] = info['credentials']['token']
+
+  if request.env['omniauth.origin']
+    redirect request.env['omniauth.origin']
+  else
+    redirect '/'
+  end
+end
+
+get '/auth/failure' do
+  if request.env['omniauth.origin']
+    redirect request.env['omniauth.origin']
+  else
+    redirect '/'
+  end
+end
+
+get '/login' do
+  if params[:redirect_path]
+    redirect '/auth/facebook?origin=' + params[:redirect_path]
+  else
+    redirect '/auth/facebook'
+  end
+end
+
+get '/logout' do
+  session.clear
+  if params[:redirect_path]
+    redirect params[:redirect_path]
+  else
+    redirect '/'
+  end
 end
 
 
@@ -57,6 +120,11 @@ get '/schedule/:id' do
   redirect '/404' if @schedule.nil?
   @schedule_dates = @schedule.schedule_dates.nil? ? Array.new : @schedule.schedule_dates
   @schedule_users = @schedule.schedule_users.nil? ? Array.new : @schedule.schedule_users
+
+  # facebook
+  @facebook_is_login = (session[:uid] != nil) ? true : false
+  @facebook_user_name = (session[:user_name] != nil) ? session[:user_name] : nil
+  @facebook_image = (session[:image] != nil) ? session[:image] : nil
 
   @schedule_attendances = Array.new
   for i in 0..@schedule_dates.length-1
@@ -141,6 +209,7 @@ post '/schedule_attendance', provides: :json do
   # {
   #   'schedule_id':'1',
   #   'user_name':'hoge',
+  #   'user_image' : 'https://hoge.jpg',
   #   'attendances':{
   #     '21':'0', -> schedule_date_id:schedule_attendance.attendance
   #     '22':'1',
@@ -169,6 +238,7 @@ post '/schedule_attendance', provides: :json do
   schedule_user.destroy if !schedule_user.nil?
   schedule_user = ScheduleUser.new
   schedule_user.name = params['user_name']
+  schedule_user.image_url = (params['user_image'] != nil) ? params['user_image'] : nil
   return response.to_json if !schedule_user.valid?
   #find schedule_dates and create schedule_attendance
   schedule_dates = Array.new
