@@ -72,6 +72,7 @@ $ heroku pg:promote HEROKU_POSTGRESQL_(COLOR)_URL
 ```
 
 #### Facebook setting
+Create Facebook app on https://developers.facebook.com/
 ```
 $ heroku config:add FACEBOOK_KEY=YOUR_FACEBOOK_KEY
 $ heroku config:add FACEBOOK_SECRET=YOUR_FACEBOOK_SECRET
